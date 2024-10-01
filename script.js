@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', async () => {
         });
 
         // Set the default API key
-        const defaultApiKey = 'c8ec5c78e09448f6bce75309220907&q'; // Default Weather API key
+        const defaultApiKey = 'c8ec5c78e09448f6bce75309220907'; // Default Weather API key
 
         // Check if the user has entered their own API key
         const userApiKey = userAPIInput.value.trim();
@@ -32,7 +32,8 @@ window.addEventListener('DOMContentLoaded', async () => {
         const geoLocation = 'https://ipapi.co/json/';
         const locationData = await fetch(geoLocation);
         const parsedLocation = await locationData.json();
-        const currentUserLocation = parsedLocation.ip;
+        const currentUserLocation = parsedLocation.city;
+        console.log(currentUserLocation)
 
         const weatherApi = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${currentUserLocation}&aqi=no`;
 
@@ -48,8 +49,8 @@ window.addEventListener('DOMContentLoaded', async () => {
         // Update DOM elements
         document.getElementById("conditionText").textContent = conditionText;
         document.getElementById("temp").textContent = `${tempCelsius}°`;
-        document.getElementById("humidityLevel").textContent = `Humidity ${humidity}%`;
-        document.getElementById("feelsLike").textContent = `Feels ${feelsLikeCelsius}°C`;
+        document.getElementById("humidityLevel").textContent = `Umidade ${humidity}%`;
+        document.getElementById("feelsLike").textContent = `Sens. térmica de ${feelsLikeCelsius}°C`;
 
         // Setting weather Icon
         const newWIcon = parsedData.current.condition.icon;
@@ -99,13 +100,13 @@ setInterval(() => {
     var month = currentTime.getMonth();
     // Define an array of month names
     var monthNames = [
-        'January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
+        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
     ];
     // Get the name of the month using the array
     var monthName = monthNames[month];
     // Define an array of day names
-    var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var dayNames = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
     // Get the name of the day using the array
     var dayName = dayNames[dayOfWeek];
     document.getElementById("date").innerText = `${dayName.substring(0, 3)}, ${monthName.substring(0, 3)} ${dayOfMonth}`
